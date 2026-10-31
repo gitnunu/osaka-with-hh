@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f4ed">
+  <meta name="theme-color" content="#fff7fa">
   <title>Osaka with HH · NUNU</title>
   <style>
-    :root{--paper:#f7f4ed;--ink:#20251f;--muted:#74786e;--green:#315747;--orange:#db754e;--line:#e6e1d7;--white:#fffefa}
+    :root{--paper:#fff7fa;--ink:#42373d;--muted:#897780;--green:#b85d7b;--orange:#de7e9c;--line:#f0d9e1;--white:#fffdfd}
     *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
     .wrap{max-width:1080px;margin:auto;padding:22px 24px 32px}.top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;letter-spacing:.12em}.brand{font-weight:800;color:var(--green);letter-spacing:.18em}
     header{padding:42px 0 26px;display:flex;justify-content:space-between;align-items:end;gap:24px}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--orange);font-weight:800}h1{font:500 clamp(38px,7vw,68px)/1 Georgia,serif;letter-spacing:-.045em;margin:10px 0}header p{color:var(--muted);margin:0;font-size:14px;line-height:1.65}
-    .buttons{display:flex;gap:9px;flex-wrap:wrap}.button{display:inline-block;border:1px solid var(--green);background:var(--green);color:white;text-decoration:none;border-radius:999px;padding:12px 17px;font-size:13px;font-weight:700;white-space:nowrap}.button:hover{background:#234436}
+    .buttons{display:flex;gap:9px;flex-wrap:wrap}.button{display:inline-block;border:1px solid var(--green);background:var(--green);color:white;text-decoration:none;border-radius:999px;padding:12px 17px;font-size:13px;font-weight:700;white-space:nowrap}.button:hover{background:#a74f6e}
     .list-info{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 2px;margin:4px 0 22px;display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:12px;line-height:1.6}.list-info strong{color:var(--green)}
-    .map-section{margin:0 0 25px}.map-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:0 0 11px}.map-heading h2{font-size:18px;margin:0;color:var(--green)}.map-heading p{font-size:12px;color:var(--muted);margin:5px 0 0}.map-link{font-size:12px;color:var(--green);font-weight:700;text-decoration:none;white-space:nowrap}.map-frame{display:block;width:100%;height:480px;border:1px solid var(--line);border-radius:18px;background:#e8e6df}
+    .map-section{margin:0 0 25px}.map-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:0 0 11px}.map-heading h2{font-size:18px;margin:0;color:var(--green)}.map-heading p{font-size:12px;color:var(--muted);margin:5px 0 0}.map-link{font-size:12px;color:var(--green);font-weight:700;text-decoration:none;white-space:nowrap}.map-frame{display:block;width:100%;height:480px;border:1px solid var(--line);border-radius:18px;background:#f5e7ed}
     .filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px}.filter{border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:999px;padding:10px 15px;font-weight:700;font-size:13px;cursor:pointer;transition:.15s}.filter:hover{border-color:var(--green);transform:translateY(-1px)}.filter.active{background:var(--green);border-color:var(--green);color:white}.count{margin-left:auto;color:var(--muted);font-size:12px}
     .places{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.place{display:flex;gap:15px;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;color:inherit;box-shadow:0 5px 18px #35423508;transition:.16s}.place:hover{transform:translateY(-2px);border-color:#bfc9bf;box-shadow:0 9px 24px #35423512}.place[hidden]{display:none}.pin{flex:0 0 38px;height:38px;border-radius:50%;display:grid;place-items:center;color:white;font-size:17px;background:var(--cat-color)}.place-body{min-width:0;flex:1}.place-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.place h2{font-size:16px;line-height:1.4;margin:0 0 5px}.place-cat{display:inline-block;font-size:11px;color:var(--cat-color);font-weight:700}.place-meta{color:var(--muted);font-size:12px;margin-top:8px}.place-arrow{color:var(--green);font-size:17px;flex:none}
     .footer{border-top:1px solid var(--line);margin-top:24px;padding-top:14px;color:var(--muted);font-size:11px;line-height:1.7}.footer a{color:var(--green)}
@@ -22,8 +22,10 @@
 
 
       .cinema-banner{position:relative;overflow:hidden;margin:2px 0 25px;padding:25px 28px;border:1px solid #d7dfd0;border-radius:22px;background:linear-gradient(115deg,#edf3e7 0%,#f8eee3 48%,#e9f0ee 100%);box-shadow:0 10px 26px rgba(44,67,51,.07)}.cinema-banner:before,.cinema-banner:after{content:"";position:absolute;border:1px solid rgba(84,111,86,.18);border-radius:50%;pointer-events:none}.cinema-banner:before{width:210px;height:210px;right:-30px;top:-125px}.cinema-banner:after{width:140px;height:140px;right:80px;bottom:-108px}.film-label{display:inline-block;color:#627b61;font-size:10px;letter-spacing:.2em;font-weight:800}.cinema-banner h2{position:relative;margin:8px 0 6px;color:#344d3e;font-family:Georgia,"Noto Serif KR",serif;font-size:clamp(19px,3vw,25px);letter-spacing:-.04em}.cinema-banner p{position:relative;margin:0;color:#6e766c;font-size:13px;line-height:1.7}.film-stamp{position:absolute;right:24px;top:23px;padding:7px 10px;border:1px solid rgba(75,102,79,.35);border-radius:7px;color:#627b61;font-size:9px;font-weight:800;letter-spacing:.12em;transform:rotate(5deg)}
-    .category-icon{display:inline-grid;width:25px;height:25px;margin-right:7px;place-items:center;border-radius:8px;background:#f1f4ec;font-size:15px;vertical-align:-4px}.category-title>span:first-child{display:flex;align-items:center}
-    @media(max-width:700px){.cinema-banner{padding:22px 19px;margin-bottom:20px}.film-stamp{right:15px;top:15px;font-size:8px}.cinema-banner p{max-width:75%}}    .place-note{display:none}
+    .category-icon{display:inline-grid;width:25px;height:25px;margin-right:7px;place-items:center;border-radius:8px;background:#fbe7ee;font-size:15px;vertical-align:-4px}.category-title>span:first-child{display:flex;align-items:center}
+    @media(max-width:700px){.cinema-banner{padding:22px 19px;margin-bottom:20px}.film-stamp{right:15px;top:15px;font-size:8px}.cinema-banner p{max-width:75%}}    .place-note{display:none}    .hero-visual{position:relative;overflow:hidden;margin:2px 0 26px;border:1px solid #edc8d5;border-radius:22px;background:#f5dce5;box-shadow:0 12px 30px rgba(149,83,108,.12)}.hero-image{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.hero-caption{position:absolute;inset:auto 0 0;padding:42px 26px 22px;background:linear-gradient(0deg,rgba(76,35,52,.76),rgba(76,35,52,0));color:#fff}.hero-kicker{display:block;margin-bottom:6px;font-size:10px;font-weight:800;letter-spacing:.18em;color:#ffe6ef}.hero-caption h2{margin:0;font-family:Georgia,"Noto Serif KR",serif;font-size:clamp(20px,3vw,30px);letter-spacing:-.04em}
+    @media(max-width:700px){.hero-visual{margin-bottom:20px;border-radius:17px}.hero-caption{padding:30px 17px 15px}.hero-caption h2{font-size:20px}.hero-kicker{font-size:8px}}
+
 
 </style>
 </head>
@@ -33,11 +35,14 @@
     <header>
       <div><div class="eyebrow">MINAMI · NAMBA · NIPPONBASHI</div><h1>Osaka with HH</h1><p>저장한 장소와 카테고리별 목록을 지도에서 확인하세요. 새 장소를 My Maps에 저장하면 목록도 자동으로 갱신됩니다.</p></div>
       <nav class="buttons" aria-label="Google 지도 목록"><a class="button" href="https://maps.app.goo.gl/KSGWq28cYj3saUHCA?g_st=i" target="_blank" rel="noreferrer">Google 지도 목록 전체 보기 ↗</a></nav>
-    </header>    <section class="cinema-banner" aria-label="여행 영화 테마">
-      <span class="film-label">A LITTLE OSAKA ADVENTURE</span>
-      <h2>우리만의 오사카 장면을 모아요</h2>
-      <p>핀 하나마다 다음 여행의 설렘이 차곡차곡 쌓여요.</p>
-      <span class="film-stamp">TRAVEL FILM · NUNU</span>
+    </header>    <section class="hero-visual" aria-label="Osaka with HH 메인 이미지">
+      <img class="hero-image" src="chiikawa-mermaid-still.jpg" alt="치이카와와 친구들이 인어섬의 나무 부두에 모여 있는 영화 스틸컷">
+      <div class="hero-caption">
+      <span class="hero-kicker">OSAKA WITH HH · OUR TRAVEL STORY</span>
+      <h2>우리의 오사카 모험을 기록해요</h2>
+      </div>
+      
+      
     </section>
     <section class="map-section" aria-label="카테고리별 저장 장소 지도">
       <div class="map-heading"><div><h2>저장 장소 지도</h2><p>핀 색상과 범례에서 카테고리를 확인하고, 아래 목록은 1분마다 자동 갱신돼요.</p></div><a class="map-link" href="https://www.google.com/maps/d/edit?mid=1rcaRBbWyXATB5BsrxY7rJkaQqhV2TRc" target="_blank" rel="noreferrer">Google 내 지도에서 크게 보기 ↗</a></div>
