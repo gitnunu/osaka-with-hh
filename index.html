@@ -16,7 +16,8 @@
     .filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px}.filter{border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:999px;padding:10px 15px;font-weight:700;font-size:13px;cursor:pointer;transition:.15s}.filter:hover{border-color:var(--green);transform:translateY(-1px)}.filter.active{background:var(--green);border-color:var(--green);color:white}.count{margin-left:auto;color:var(--muted);font-size:12px}
     .places{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.place{display:flex;gap:15px;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;color:inherit;box-shadow:0 5px 18px #35423508;transition:.16s}.place:hover{transform:translateY(-2px);border-color:#bfc9bf;box-shadow:0 9px 24px #35423512}.place[hidden]{display:none}.pin{flex:0 0 38px;height:38px;border-radius:50%;display:grid;place-items:center;color:white;font-size:17px;background:var(--cat-color)}.place-body{min-width:0;flex:1}.place-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.place h2{font-size:16px;line-height:1.4;margin:0 0 5px}.place-cat{display:inline-block;font-size:11px;color:var(--cat-color);font-weight:700}.place-meta{color:var(--muted);font-size:12px;margin-top:8px}.place-arrow{color:var(--green);font-size:17px;flex:none}
     .footer{border-top:1px solid var(--line);margin-top:24px;padding-top:14px;color:var(--muted);font-size:11px;line-height:1.7}.footer a{color:var(--green)}
-    @media(max-width:700px){.wrap{padding:16px 14px 24px}header{display:block;padding:32px 0 20px}.buttons{margin-top:17px}.list-info{display:block}.list-info span{display:block;margin-top:5px}.places{grid-template-columns:1fr}.filterbar{gap:6px}.filter{padding:9px 12px;font-size:12px}.count{width:100%;margin:4px 2px 0}.place{padding:15px}.top span:last-child{display:none}}    @media(max-width:700px){.map-frame{height:440px}.map-heading{align-items:start;flex-direction:column}}
+    @media(max-width:700px){.wrap{padding:16px 14px 24px}header{display:block;padding:32px 0 20px}.buttons{margin-top:17px}.list-info{display:block}.list-info span{display:block;margin-top:5px}.places{grid-template-columns:1fr}.filterbar{gap:6px}.filter{padding:9px 12px;font-size:12px}.count{width:100%;margin:4px 2px 0}.place{padding:15px}.top span:last-child{display:none}}    @media(max-width:700px){.map-frame{height:440px}.map-heading{align-items:start;flex-direction:column}}    header{padding:24px 0 18px}.map-frame{height:650px}@media(max-width:700px){header{padding:24px 0 16px}.map-frame{height:540px}}
+
 
   </style>
 </head>
@@ -24,42 +25,12 @@
   <main class="wrap">
     <div class="top"><span class="brand">OSAKA WITH HH</span><span>MY SAVED PLACES · NUNU</span></div>
     <header>
-      <div><div class="eyebrow">MINAMI · NAMBA · NIPPONBASHI</div><h1>Osaka with HH</h1><p>저장한 7곳을 카테고리별로 살펴보고, 장소를 누르면 Google 지도에서 열어보세요.</p></div>
+      <div><div class="eyebrow">MINAMI · NAMBA · NIPPONBASHI</div><h1>Osaka with HH</h1><p>저장한 장소를 지도에서 확인하세요. 새 장소는 Google 내 지도에 추가하면 됩니다.</p></div>
       <nav class="buttons" aria-label="Google 지도 목록"><a class="button" href="https://maps.app.goo.gl/KSGWq28cYj3saUHCA?g_st=i" target="_blank" rel="noreferrer">Google 지도 목록 전체 보기 ↗</a></nav>
     </header>    <section class="map-section" aria-label="카테고리별 저장 장소 지도">
-      <div class="map-heading"><div><h2>저장 장소 지도</h2><p>핀 색상으로 음식, 쇼핑·기념품, 취미 장소를 구분했어요.</p></div><a class="map-link" href="https://www.google.com/maps/d/edit?mid=1rcaRBbWyXATB5BsrxY7rJkaQqhV2TRc" target="_blank" rel="noreferrer">Google 내 지도에서 크게 보기 ↗</a></div>
+      <div class="map-heading"><div><h2>저장 장소 지도</h2><p>지도 범례에서 음식, 쇼핑·기념품, 취미 카테고리를 확인하세요.</p></div><a class="map-link" href="https://www.google.com/maps/d/edit?mid=1rcaRBbWyXATB5BsrxY7rJkaQqhV2TRc" target="_blank" rel="noreferrer">Google 내 지도에서 크게 보기 ↗</a></div>
       <iframe class="map-frame" src="https://www.google.com/maps/d/embed?mid=1rcaRBbWyXATB5BsrxY7rJkaQqhV2TRc&amp;ehbc=2E312F" title="Osaka with HH · NUNU 카테고리별 장소 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-    </section>
-
-    <div class="list-info"><strong>Osaka with HH · NUNU</strong><span>전체 장소 7곳 · 저장 목록은 Google 지도에서 열립니다.</span></div>
-    <nav class="filterbar" aria-label="장소 카테고리">
-      <button class="filter active" type="button" data-cat="all">전체</button>
-      <button class="filter" type="button" data-cat="food">🍜 음식</button>
-      <button class="filter" type="button" data-cat="shopping">🛍️ 쇼핑·기념품</button>
-      <button class="filter" type="button" data-cat="hobby">🎮 취미</button>
-      <span class="count" id="count" aria-live="polite">7곳 표시</span>
-    </nav>
-    <section class="places" aria-label="저장한 장소 목록">
-      <a class="place" data-cat="food" href="https://www.google.com/maps/search/?api=1&amp;query=%EC%98%A4%EC%BD%94%EB%85%B8%EB%AF%B8%EC%95%BC%EB%81%BC%20%EC%82%AC%EC%B9%B4%EB%B0%94O%20%EB%82%9C%EB%B0%94%EC%A0%90%20Osaka" target="_blank" rel="noreferrer" style="--cat-color:#dc754e"><span class="pin">🍜</span><span class="place-body"><span class="place-heading"><span><h2>오코노미야끼 사카바O 난바점</h2><span class="place-cat">음식</span></span><span class="place-arrow">↗</span></span><span class="place-meta">★ 4.7 · 리뷰 1,375개 · ¥1,000~¥2,000</span></span></a>
-      <a class="place" data-cat="shopping" href="https://www.google.com/maps/search/?api=1&amp;query=GU%20Osaka%20Namba" target="_blank" rel="noreferrer" style="--cat-color:#54825e"><span class="pin">🛍️</span><span class="place-body"><span class="place-heading"><span><h2>GU</h2><span class="place-cat">쇼핑·기념품</span></span><span class="place-arrow">↗</span></span><span class="place-meta">★ 4.1 · 리뷰 3,075개 · 의류점</span></span></a>
-      <a class="place" data-cat="hobby" href="https://www.google.com/maps/search/?api=1&amp;query=%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%EB%9E%9C%EB%93%9C%20%ED%8C%8C%EB%A5%B4%EC%BD%94%20%EC%8B%A0%EC%82%AC%EC%9D%B4%EB%B0%94%EC%8B%9C%EC%A0%90%20Osaka" target="_blank" rel="noreferrer" style="--cat-color:#8465ae"><span class="pin">🎮</span><span class="place-body"><span class="place-heading"><span><h2>치이카와랜드 파르코 신사이바시점</h2><span class="place-cat">취미</span></span><span class="place-arrow">↗</span></span><span class="place-meta">★ 4.0 · 리뷰 232개 · 취미용품점</span></span></a>
-      <a class="place" data-cat="shopping" href="https://www.google.com/maps/search/?api=1&amp;query=%EC%84%BC%EB%8B%88%EC%B9%98%EB%A7%88%EC%97%90%20%EB%8F%84%EA%B5%AC%EC%95%BC%EC%8A%A4%EC%A7%80%20%EC%83%81%EC%A0%90%EA%B0%80%20Osaka" target="_blank" rel="noreferrer" style="--cat-color:#54825e"><span class="pin">🛍️</span><span class="place-body"><span class="place-heading"><span><h2>센니치마에 도구야스지 상점가</h2><span class="place-cat">쇼핑·기념품</span></span><span class="place-arrow">↗</span></span><span class="place-meta">★ 4.2 · 리뷰 6,574개 · 상업 지구</span></span></a>
-      <a class="place" data-cat="hobby" href="https://www.google.com/maps/search/?api=1&amp;query=%EB%8D%B4%EB%8D%B4%ED%83%80%EC%9A%B4%20Osaka" target="_blank" rel="noreferrer" style="--cat-color:#8465ae"><span class="pin">🎮</span><span class="place-body"><span class="place-heading"><span><h2>덴덴타운</h2><span class="place-cat">취미</span></span><span class="place-arrow">↗</span></span><span class="place-meta">★ 4.4 · 리뷰 69개 · 잡화점</span></span></a>
-      <a class="place" data-cat="hobby" href="https://www.google.com/maps/search/?api=1&amp;query=%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20%EC%98%A4%EC%82%AC%EC%B9%B4%20%EB%8B%9B%ED%8F%B0%EB%B0%94%EC%8B%9C%EC%A0%90" target="_blank" rel="noreferrer" style="--cat-color:#8465ae"><span class="pin">🎮</span><span class="place-body"><span class="place-heading"><span><h2>애니메이트 오사카 닛폰바시점</h2><span class="place-cat">취미</span></span><span class="place-arrow">↗</span></span><span class="place-meta">★ 4.2 · 리뷰 9,742개 · 만화·애니메이션</span></span></a>
-      <a class="place" data-cat="hobby" href="https://www.google.com/maps/search/?api=1&amp;query=%EA%B3%A0%ED%86%A0%EB%B6%80%ED%82%A4%EC%95%BC%20%EB%8B%9B%ED%8F%B0%EB%B0%94%EC%8B%9C%EC%A0%90" target="_blank" rel="noreferrer" style="--cat-color:#8465ae"><span class="pin">🎮</span><span class="place-body"><span class="place-heading"><span><h2>고토부키야 닛폰바시점</h2><span class="place-cat">취미</span></span><span class="place-arrow">↗</span></span><span class="place-meta">★ 4.2 · 리뷰 346개 · 취미용품점</span></span></a>
-    </section>
-    <footer class="footer">장소와 리뷰 정보는 <a href="https://maps.app.goo.gl/KSGWq28cYj3saUHCA?g_st=i" target="_blank" rel="noreferrer">Osaka with HH · NUNU Google 지도 목록</a>을 바탕으로 정리했어요. 새 장소를 목록에 추가하면 이 페이지의 카테고리 목록도 업데이트해야 합니다.</footer>
+    </section>    <footer class="footer">핀과 장소 정보는 <a href="https://maps.app.goo.gl/KSGWq28cYj3saUHCA?g_st=i" target="_blank" rel="noreferrer">Google 지도 저장 목록</a> 및 카테고리 지도에서 확인할 수 있어요. 새 장소는 Google 내 지도에 추가하면 지도에 반영됩니다.</footer>
   </main>
-  <script>
-    const buttons=Array.from(document.querySelectorAll(".filter"));
-    const places=Array.from(document.querySelectorAll(".place"));
-    function showCategory(category){
-      buttons.forEach(button=>button.classList.toggle("active",button.dataset.cat===category));
-      let visible=0;
-      places.forEach(place=>{const show=category==="all"||place.dataset.cat===category;place.hidden=!show;if(show)visible++});
-      document.getElementById("count").textContent=visible+"곳 표시";
-    }
-    buttons.forEach(button=>button.addEventListener("click",()=>showCategory(button.dataset.cat)));
-  </script>
 </body>
 </html>
