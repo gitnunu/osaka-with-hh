@@ -14,6 +14,8 @@
     .buttons{display:flex;gap:9px;flex-wrap:wrap}.button{display:inline-block;border:1px solid var(--green);background:var(--green);color:white;text-decoration:none;border-radius:999px;padding:10px 15px;font-size:12px;font-weight:700}.button.secondary{background:transparent;color:var(--green)}
     .filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:2px 0 12px}.filter{border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:999px;padding:10px 15px;font-weight:700;font-size:13px;cursor:pointer;transition:.15s}.filter:hover{border-color:var(--green);transform:translateY(-1px)}.filter.active{background:var(--green);border-color:var(--green);color:white}.count{margin-left:auto;color:var(--muted);font-size:12px}
     #map{height:min(70vh,760px);min-height:420px;background:#e8e6df;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 12px 35px #3542350b}.leaflet-container{font:13px Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}.leaflet-popup-content-wrapper{border-radius:12px}.popup-title{font-weight:700;font-size:14px;margin-bottom:4px}.popup-cat{color:#687267;font-size:12px}
+    .legend{display:flex;gap:12px;flex-wrap:wrap;margin:0 2px 12px;color:var(--muted);font-size:12px}.legend-item{display:flex;align-items:center;gap:6px}.legend-dot{width:11px;height:11px;border-radius:50%;background:var(--dot);box-shadow:0 0 0 2px white,0 0 0 3px var(--dot)}
+    .map-pin{position:relative;width:28px;height:34px;display:block;background:var(--pin-color);border:2px solid white;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);box-shadow:0 2px 5px #20251f66}.map-pin::after{content:"";position:absolute;width:8px;height:8px;background:white;border-radius:50%;left:8px;top:8px}
     .status{color:var(--muted);font-size:12px;margin:11px 2px}.foot{border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-size:11px;margin-top:20px;padding-top:13px}.foot strong{color:var(--green)}.foot a{color:var(--green)}
     @media(max-width:650px){.wrap{padding:16px 14px 22px}header{display:block;padding:28px 0 17px}.buttons{margin-top:16px}.filterbar{gap:6px}.filter{padding:9px 11px;font-size:12px}.count{width:100%;margin:3px 2px 0}#map{height:68vh;min-height:400px;border-radius:14px}.top span:last-child{display:none}.foot{display:block}.foot span{display:block;margin-top:6px}}
   </style>
@@ -33,6 +35,12 @@
       <button class="filter" type="button" data-cat="hobby">🎮 취미 들를 곳</button>
       <span class="count" id="count" aria-live="polite"></span>
     </nav>
+    <div class="legend" aria-label="핀 색상 안내">
+      <span class="legend-item"><i class="legend-dot" style="--dot:#3478b8"></i>지하철역</span>
+      <span class="legend-item"><i class="legend-dot" style="--dot:#54825e"></i>호텔</span>
+      <span class="legend-item"><i class="legend-dot" style="--dot:#dc754e"></i>식당</span>
+      <span class="legend-item"><i class="legend-dot" style="--dot:#8465ae"></i>취미 들를 곳</span>
+    </div>
     <div id="map" role="application" aria-label="카테고리별 오사카 지도"></div>
     <p class="status" id="status" aria-live="polite"></p>
     <footer class="foot"><strong>핀은 현재 Google My Maps에 저장된 장소에서 가져왔어요.</strong><span>My Maps에 장소를 추가하면 이 홈페이지의 목록도 다시 업데이트해야 합니다. 지도 바탕: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a></span></footer>
@@ -49,7 +57,8 @@
     const map=L.map("map",{scrollWheelZoom:true}).setView([34.6638,135.5025],16);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
     const markers=places.map(function(place){
-      const marker=L.circleMarker([place.lat,place.lng],{radius:9,color:"#fff",weight:2,fillColor:colors[place.cat],fillOpacity:1});
+      const icon=L.divIcon({className:"",html:'<span class="map-pin" style="--pin-color:'+colors[place.cat]+'"></span>',iconSize:[28,34],iconAnchor:[14,34],popupAnchor:[0,-32]});
+      const marker=L.marker([place.lat,place.lng],{icon:icon});
       marker.bindPopup('<div class="popup-title">'+place.name+'</div><div class="popup-cat">'+labels[place.cat]+'</div><a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query='+place.lat+','+place.lng+'">Google 지도에서 열기 ↗</a>');
       marker.place=place;return marker;
     });
