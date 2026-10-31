@@ -5,28 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f4ed">
   <title>Osaka with HH — 오사카 여행 지도</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <style>
-    :root{--paper:#f7f4ed;--ink:#20251f;--muted:#74786e;--green:#315747;--orange:#db754e;--line:#e6e1d7}
+    :root{--paper:#f7f4ed;--ink:#20251f;--muted:#74786e;--green:#315747;--orange:#db754e;--line:#e6e1d7;--white:#fffefa}
     *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
     .wrap{max-width:1280px;margin:auto;padding:22px 24px 28px}.top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;letter-spacing:.12em}.brand{font-weight:800;color:var(--green);letter-spacing:.18em}
     header{padding:32px 0 20px;display:flex;justify-content:space-between;align-items:end;gap:20px}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--orange);font-weight:800}h1{font:500 clamp(36px,6vw,62px)/1 Georgia,serif;letter-spacing:-.045em;margin:10px 0}header p{color:var(--muted);margin:0;font-size:14px}
     .buttons{display:flex;gap:9px;flex-wrap:wrap}.button{display:inline-block;border:1px solid var(--green);background:var(--green);color:white;text-decoration:none;border-radius:999px;padding:10px 15px;font-size:12px;font-weight:700}.button.secondary{background:transparent;color:var(--green)}
-    .mapbox{height:min(72vh,780px);min-height:430px;background:#e8e6df;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 12px 35px #3542350b}.mapbox iframe{width:100%;height:100%;border:0}
-    .foot{display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-size:11px;margin-top:13px}.foot strong{color:var(--green)}
-    @media(max-width:650px){.wrap{padding:16px 14px 22px}header{display:block;padding:28px 0 17px}.buttons{margin-top:16px}.mapbox{height:70vh;min-height:400px;border-radius:14px}.top span:last-child{display:none}.foot{display:block}.foot span{display:block;margin-top:5px}}
+    .filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:2px 0 12px}.filter{border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:999px;padding:10px 15px;font-weight:700;font-size:13px;cursor:pointer;transition:.15s}.filter:hover{border-color:var(--green);transform:translateY(-1px)}.filter.active{background:var(--green);border-color:var(--green);color:white}.count{margin-left:auto;color:var(--muted);font-size:12px}
+    #map{height:min(70vh,760px);min-height:420px;background:#e8e6df;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 12px 35px #3542350b}.leaflet-container{font:13px Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}.leaflet-popup-content-wrapper{border-radius:12px}.popup-title{font-weight:700;font-size:14px;margin-bottom:4px}.popup-cat{color:#687267;font-size:12px}
+    .status{color:var(--muted);font-size:12px;margin:11px 2px}.foot{border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-size:11px;margin-top:20px;padding-top:13px}.foot strong{color:var(--green)}.foot a{color:var(--green)}
+    @media(max-width:650px){.wrap{padding:16px 14px 22px}header{display:block;padding:28px 0 17px}.buttons{margin-top:16px}.filterbar{gap:6px}.filter{padding:9px 11px;font-size:12px}.count{width:100%;margin:3px 2px 0}#map{height:68vh;min-height:400px;border-radius:14px}.top span:last-child{display:none}.foot{display:block}.foot span{display:block;margin-top:6px}}
   </style>
 </head>
 <body>
   <main class="wrap">
     <div class="top"><span class="brand">OSAKA WITH HH</span><span>MY SAVED PLACES · 2026</span></div>
     <header>
-      <div><div class="eyebrow">MINAMI · NAMBA · NIPPONBASHI</div><h1>Osaka with HH</h1><p>저장한 핀을 지하철역 · 호텔 · 식당 · 취미 들를 곳으로 나눠 정리했어요.</p></div>
-      <nav class="buttons" aria-label="지도 링크"><a class="button" href="https://www.google.com/maps/d/edit?mid=1s5inQFu1AG5c9cI9uOVdT1VI06qNtmQ&amp;usp=sharing" target="_blank" rel="noreferrer">내 지도 편집 ↗</a><a class="button secondary" href="https://www.google.com/maps/d/viewer?mid=1s5inQFu1AG5c9cI9uOVdT1VI06qNtmQ" target="_blank" rel="noreferrer">Google 지도에서 열기 ↗</a></nav>
+      <div><div class="eyebrow">MINAMI · NAMBA · NIPPONBASHI</div><h1>Osaka with HH</h1><p>카테고리 버튼을 눌러 원하는 장소의 핀만 지도에 표시해 보세요.</p></div>
+      <nav class="buttons" aria-label="지도 링크"><a class="button" href="https://www.google.com/maps/d/edit?mid=1s5inQFu1AG5c9cI9uOVdT1VI06qNtmQ&amp;usp=sharing" target="_blank" rel="noreferrer">저장 지도 편집 ↗</a><a class="button secondary" href="https://www.google.com/maps/d/viewer?mid=1s5inQFu1AG5c9cI9uOVdT1VI06qNtmQ" target="_blank" rel="noreferrer">Google 지도 열기 ↗</a></nav>
     </header>
-    <section class="mapbox" aria-label="내가 저장한 오사카 장소 지도">
-      <iframe src="https://www.google.com/maps/d/embed?mid=1s5inQFu1AG5c9cI9uOVdT1VI06qNtmQ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="내가 저장한 오사카 장소"></iframe>
-    </section>
-    <footer class="foot"><strong>지도에 추가한 핀을 수정하면 이 화면에도 반영됩니다.</strong><span>지도가 표시되지 않으면 My Maps 공유 설정에서 공개 또는 링크가 있는 사용자에게 보기 권한을 허용해 주세요. 이 홈페이지는 공개 페이지입니다.</span></footer>
+    <nav class="filterbar" aria-label="지도 핀 카테고리">
+      <button class="filter active" type="button" data-cat="all">🗺️ 전체</button>
+      <button class="filter" type="button" data-cat="station">🚇 지하철역</button>
+      <button class="filter" type="button" data-cat="hotel">🏨 호텔</button>
+      <button class="filter" type="button" data-cat="food">🍜 식당</button>
+      <button class="filter" type="button" data-cat="hobby">🎮 취미 들를 곳</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </nav>
+    <div id="map" role="application" aria-label="카테고리별 오사카 지도"></div>
+    <p class="status" id="status" aria-live="polite"></p>
+    <footer class="foot"><strong>핀은 현재 Google My Maps에 저장된 장소에서 가져왔어요.</strong><span>My Maps에 장소를 추가하면 이 홈페이지의 목록도 다시 업데이트해야 합니다. 지도 바탕: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a></span></footer>
   </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const places=[
+      {name:"난바",cat:"station",lat:34.6670979,lng:135.5003424},
+      {name:"센니치마에 도구야스지 상점가",cat:"hobby",lat:34.6640141,lng:135.5035063},
+      {name:"애니메이트 오사카 닛폰바시점",cat:"hobby",lat:34.6605473,lng:135.5046125}
+    ];
+    const labels={station:"지하철역",hotel:"호텔",food:"식당",hobby:"취미 들를 곳"};
+    const colors={station:"#3478b8",hotel:"#54825e",food:"#dc754e",hobby:"#8465ae"};
+    const map=L.map("map",{scrollWheelZoom:true}).setView([34.6638,135.5025],16);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+    const markers=places.map(function(place){
+      const marker=L.circleMarker([place.lat,place.lng],{radius:9,color:"#fff",weight:2,fillColor:colors[place.cat],fillOpacity:1});
+      marker.bindPopup('<div class="popup-title">'+place.name+'</div><div class="popup-cat">'+labels[place.cat]+'</div><a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query='+place.lat+','+place.lng+'">Google 지도에서 열기 ↗</a>');
+      marker.place=place;return marker;
+    });
+    function selectCategory(cat){
+      document.querySelectorAll(".filter").forEach(function(button){button.classList.toggle("active",button.dataset.cat===cat)});
+      const shown=markers.filter(function(marker){return cat==="all"||marker.place.cat===cat});
+      markers.forEach(function(marker){if(map.hasLayer(marker))map.removeLayer(marker)});
+      shown.forEach(function(marker){marker.addTo(map)});
+      document.getElementById("count").textContent=shown.length+"곳 표시";
+      document.getElementById("status").textContent=shown.length?((cat==="all"?"전체":labels[cat])+" 장소를 표시하고 있어요. 핀을 누르면 장소 정보와 Google 지도 링크를 볼 수 있습니다."):("아직 "+labels[cat]+" 카테고리에 저장된 핀이 없어요.");
+      if(shown.length>1){map.fitBounds(L.featureGroup(shown).getBounds().pad(0.25))}else if(shown.length===1){map.setView(shown[0].getLatLng(),17)}else{map.setView([34.6638,135.5025],15)}
+    }
+    document.querySelectorAll(".filter").forEach(function(button){button.addEventListener("click",function(){selectCategory(button.dataset.cat)})});
+    selectCategory("all");
+  </script>
 </body>
 </html>
